@@ -9,28 +9,28 @@ import (
 )
 
 type FiberLoggingFormat struct {
-	TagPid               string `json:"pid"`
-	TagTime              string `json:"time"`
-	TagReferer           string `json:"referer"`
-	TagProtocol          string `json:"protocol"`
-	TagPort              string `json:"port"`
-	TagIP                string `json:"ip"`
-	TagIPs               string `json:"ips"`
-	TagHost              string `json:"host"`
-	TagMethod            string `json:"method"`
-	TagPath              string `json:"path"`
-	TagURL               string `json:"url"`
-	TagUA                string `json:"ua"`
-	TagLatency           string `json:"latency"`
-	TagStatus            string `json:"status"`  // response status
-	TagResBody           string `json:"resBody"` // response body
-	TagReqHeaders        string `json:"reqHeaders"`
-	TagQueryStringParams string `json:"queryParams"` // request query parameters
-	TagBody              string `json:"body"`        // request body
-	TagBytesSent         string `json:"bytesSent"`
-	TagBytesReceived     string `json:"bytesReceived"`
-	TagRoute             string `json:"route"`
-	TagError             string `json:"error"`
+	TagPid               string `json:"pid,omitempty"`
+	TagTime              string `json:"time,omitempty"`
+	TagReferer           string `json:"referer,omitempty"`
+	TagProtocol          string `json:"protocol,omitempty"`
+	TagPort              string `json:"port,omitempty"`
+	TagIP                string `json:"ip,omitempty"`
+	TagIPs               string `json:"ips,omitempty"`
+	TagHost              string `json:"host,omitempty"`
+	TagMethod            string `json:"method,omitempty"`
+	TagPath              string `json:"path,omitempty"`
+	TagURL               string `json:"url,omitempty"`
+	TagUA                string `json:"ua,omitempty"`
+	TagLatency           string `json:"latency,omitempty"`
+	TagStatus            string `json:"status,omitempty"`  // response status
+	TagResBody           string `json:"resBody,omitempty"` // response body
+	TagReqHeaders        string `json:"reqHeaders,omitempty"`
+	TagQueryStringParams string `json:"queryParams,omitempty"` // request query parameters
+	TagBody              string `json:"body,omitempty"`        // request body
+	TagBytesSent         string `json:"bytesSent,omitempty"`
+	TagBytesReceived     string `json:"bytesReceived,omitempty"`
+	TagRoute             string `json:"route,omitempty"`
+	TagError             string `json:"error,omitempty"`
 }
 
 func GetAuditLogger() fiber.Handler {
