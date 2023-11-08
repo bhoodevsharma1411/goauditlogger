@@ -1,4 +1,4 @@
-package goauditlogger
+package audit
 
 import (
 	"encoding/json"
