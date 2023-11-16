@@ -1,0 +1,30 @@
+name: Create Tag on Push
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Git
+      run: |
+        git config user.name "${{ github.actor }}"
+        git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+    - name: Create Tag
+      run: |
+        # Get the latest commit hash
+        COMMIT_HASH=$(git rev-parse HEAD)
+
+        # Create a lightweight tag using the commit hash
+        git tag $COMMIT_HASH
+
+        # Push the tag to the repository
+        git push origin $COMMIT_HASH
