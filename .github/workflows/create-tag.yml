@@ -1,32 +1,21 @@
-name: Create Tag on Push
-
+name: Bump version
 on:
   push:
     branches:
       - master
-
 jobs:
-  create-tag:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Git
-      run: |
-        git config user.name "${{ github.actor }}"
-        git config user.email "${{ github.actor }}@users.noreply.github.com"
-
-    - name: Create Tag
-      run: |
-        # Get the latest commit hash
-        COMMIT_HASH=$(git rev-parse HEAD)
-        echo $COMMIT_HASH
-
-        # Create a lightweight tag using the commit hash
-        git tag $COMMIT_HASH
-
-        # Push the tag to the repository
-        echo secrets.GH_TOKEN_01
-        git push origin $COMMIT_HASH -u ${{ secrets.GH_TOKEN_01 }}
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.GT_TOKEN }}
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
