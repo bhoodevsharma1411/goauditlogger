@@ -27,4 +27,4 @@ jobs:
         git tag $COMMIT_HASH
 
         # Push the tag to the repository
-        git push origin $COMMIT_HASH
+        git push origin $COMMIT_HASH -u ${{ secrets.GH_TOKEN }}
