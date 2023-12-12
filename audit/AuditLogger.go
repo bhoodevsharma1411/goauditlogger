@@ -33,9 +33,13 @@ type FiberLoggingFormat struct {
 	TagError             string `json:"error,omitempty"`
 }
 
+var LoggerObj fiber.Handler
+
 func GetAuditLogger() fiber.Handler {
-	logger_obj := logger.New(GetDefaultConfig())
-	return logger_obj
+	if LoggerObj == nil {
+		LoggerObj = logger.New(GetDefaultConfig())
+	}
+	return LoggerObj
 }
 
 func GetDefaultConfig() logger.Config {
